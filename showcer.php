@@ -5,9 +5,14 @@
 
 //  $getregis_id        = '2';
 
- $id = $_GET['regis_id'];
+ $pid = $_GET['pid'];
+ $tid = $_GET['tid'];
 
- $sql = "SELECT * FROM cer WHERE regis_id = '".$id."'";
+ $sql = "SELECT * FROM participants 
+ INNER JOIN register ON register.P_ID = participants.P_ID
+ INNER JOIN cer ON cer.regis_id = register.regis_id
+ INNER JOIN training ON training.T_ID = register.T_ID
+ WHERE register.P_ID ='$pid' AND register.T_ID ='$tid'";
  $result = mysqli_query($con, $sql);
  
  $arr = array();
